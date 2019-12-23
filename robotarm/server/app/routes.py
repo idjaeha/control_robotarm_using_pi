@@ -13,3 +13,7 @@ def index(value = 3):
 @app.route('/profile/<username>/')
 def get_profile(username):
     return url_for("test_cookies", myname=username)
+
+@app.route('/motor/<int:number>')
+def get_motor(number):
+    return [number for _ in range(6)]
