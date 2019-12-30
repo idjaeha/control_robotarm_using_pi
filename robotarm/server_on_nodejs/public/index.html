@@ -2,6 +2,13 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script>
+function ShowSliderValue(idx, value) {
+  var valueView = document.getElementById("m" + idx + "slider_value");
+  valueView.innerHTML = value;
+}
+</script>
+
 <style>
 .slider {
   -webkit-appearance: none;
@@ -52,12 +59,35 @@
     <h1>Robot arm control</h1>
     <div class="w3-cell-row">
         <div class="w3-container w3-cell w3-mobile">
-            <p><input type="range" min="0" max="100" value="0" class="slider" id="m1Slider"></p>
-            <p><input type="range" min="0" max="100" value="0" class="slider" id="m2Slider"></p>
-            <p><input type="range" min="0" max="100" value="0" class="slider" id="m3Slider"></p>
-            <p><input type="range" min="0" max="100" value="0" class="slider" id="m4Slider"></p>
-            <p><input type="range" min="0" max="100" value="0" class="slider" id="m5Slider"></p>
-            <p><input type="range" min="0" max="100" value="0" class="slider" id="m6Slider"></p>
+            <p>
+              <font size=5 id="m1slider_value">0</font>
+              <input type="range" oninput="ShowSliderValue(1, this.value)" min="0" max="100" value="0" class="slider" id="m1Slider">
+            </p>
+
+            <p>
+              <font size=5 id="m2slider_value">0</font>
+              <input type="range" oninput="ShowSliderValue(2, this.value)" min="0" max="100" value="0" class="slider" id="m2Slider">
+            </p>
+
+            <p>
+              <font size=5 id="m3slider_value">0</font>
+              <input type="range" oninput="ShowSliderValue(3, this.value)" min="0" max="100" value="0" class="slider" id="m3Slider">
+            </p>
+
+            <p>
+              <font size=5 id="m4slider_value">0</font>
+              <input type="range" oninput="ShowSliderValue(4, this.value)" min="0" max="100" value="0" class="slider" id="m4Slider">
+            </p>
+
+            <p>
+              <font size=5 id="m5slider_value">0</font>
+              <input type="range" oninput="ShowSliderValue(5, this.value)" min="0" max="100" value="0" class="slider" id="m5Slider">
+            </p>
+
+            <p>
+              <font size=5 id="m6slider_value">0</font>
+              <input type="range" oninput="ShowSliderValue(6, this.value)" min="0" max="100" value="0" class="slider" id="m6Slider">
+            </p>
         </div>
     </div>
 </div>
@@ -72,37 +102,37 @@ window.addEventListener("load", function(){ //when page loads
   var m4Slider = document.getElementById("m4Slider");
   var m5Slider = document.getElementById("m5Slider");
   var m6Slider = document.getElementById("m6Slider");
+  var motorValue = [0, 0, 0, 0, 0, 0]
 
   m1Slider.addEventListener("change", function() { //add event listener for when red slider changes
-    motorValue = this.value; //update the RED color according to the slider
+    motorValue[0] = this.value; //update the RED color according to the slider
     socket.emit("motor", motorValue); //send the updated color to RGB LED via WebSocket
     });
 
   m2Slider.addEventListener("change", function() { //add event listener for when red slider changes
-    motorValue = this.value; //update the RED color according to the slider
+    motorValue[1] = this.value; //update the RED color according to the slider
     socket.emit("motor", motorValue); //send the updated color to RGB LED via WebSocket
     });
 
   m3Slider.addEventListener("change", function() { //add event listener for when red slider changes
-    motorValue = this.value; //update the RED color according to the slider
+    motorValue[2] = this.value; //update the RED color according to the slider
     socket.emit("motor", motorValue); //send the updated color to RGB LED via WebSocket
     });
 
   m4Slider.addEventListener("change", function() { //add event listener for when red slider changes
-    motorValue = this.value; //update the RED color according to the slider
+    motorValue[3] = this.value; //update the RED color according to the slider
     socket.emit("motor", motorValue); //send the updated color to RGB LED via WebSocket
     });
 
   m5Slider.addEventListener("change", function() { //add event listener for when red slider changes
-    motorValue = this.value; //update the RED color according to the slider
+    motorValue[4] = this.value; //update the RED color according to the slider
     socket.emit("motor", motorValue); //send the updated color to RGB LED via WebSocket
     });
 
   m6Slider.addEventListener("change", function() { //add event listener for when red slider changes
-    motorValue = this.value; //update the RED color according to the slider
+    motorValue[5] = this.value; //update the RED color according to the slider
     socket.emit("motor", motorValue); //send the updated color to RGB LED via WebSocket
     });
-
 });
 </script>
 </html>

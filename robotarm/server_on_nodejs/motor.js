@@ -42,12 +42,12 @@ io.sockets.on('connection', function (socket) {// Web Socket Connection
     console.log(data); //output data from WebSocket connection to console
 
     //for common cathode RGB LED 0 is fully off, and 255 is fully on
-    motor1Value=parseInt(data);
-    motor2Value=parseInt(data);
-    motor3Value=parseInt(data);
-    motor4Value=parseInt(data);
-    motor5Value=parseInt(data);
-    motor6Value=parseInt(data);
+    motor1Value=parseInt(data[0]);
+    motor2Value=parseInt(data[1]);
+    motor3Value=parseInt(data[2]);
+    motor4Value=parseInt(data[3]);
+    motor5Value=parseInt(data[4]);
+    motor6Value=parseInt(data[5]);
 
     motor1.pwmWrite(motor1Value);
     motor2.pwmWrite(motor2Value);
