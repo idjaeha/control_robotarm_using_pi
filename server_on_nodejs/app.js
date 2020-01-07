@@ -1,20 +1,17 @@
 const http = require("http").createServer(httpHandler);
 const fs = require("fs"); //require filesystem module
 const io = require("socket.io")(http); //require socket.io module and pass the http object (server)
-const Gpio = require("pigpio").Gpio; //include pigpio to interact with the GPIO
 const url = require("url");
-const GPIO_NUMS = [13, 19, 26, 16, 20, 21];
-const motors = [];
+const MOTOR_NUMS = 6;
+const START_VALUES = [370, 375, 440, 280, 190, 175];
+const makePwmDriver = require("adafruit-i2c-pwm-driver");
+const pwmDriver = makePwmDriver({ address: 0x40, device: "/dev/i2c-1" });
 
 function setMotors() {
-  GPIO_NUMS.forEach(function(num) {
-    const motorObj = {
-      gpio: new Gpio(num, { mode: Gpio.OUTPUT }),
-      value: 0
-    };
-    motorObj.gpio.digitalWrite(0);
-    motors.push(motorObj);
-  });
+  let i;
+  for (i = 0; i < MOTOR_NUMS; i++) {
+    pwmDriver.setPWM(i, 0, START_VALUES[i]);
+  }
 }
 
 function init() {
@@ -62,10 +59,7 @@ function socketInit() {
       console.log(data);
       const value = parseInt(data.value);
       const id = parseInt(data.id);
-      const motor = motors[id];
-      motor.value = value;
-      motor.gpio.pwmWrite(value);
-      console.log(motor);
+      pwmDriver.setPWM(id, 0, value);
     });
   });
 }
@@ -73,9 +67,9 @@ function socketInit() {
 function exitInit() {
   process.on("SIGINT", function() {
     console.log("good bye!");
-    motors.forEach(function(motor) {
-      motor.gpio.digitalWrite(0);
-    });
+    for (let i = 0; i < MOTOR_NUMS; i++) {
+      pwmDriver.setPWM(i, 0, 0);
+    }
     process.exit(); //exit completely
   });
 }
