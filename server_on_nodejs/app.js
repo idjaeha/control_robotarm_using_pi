@@ -8,8 +8,7 @@ const makePwmDriver = require("adafruit-i2c-pwm-driver");
 const pwmDriver = makePwmDriver({ address: 0x40, device: "/dev/i2c-1" });
 
 function setMotors() {
-  let i;
-  for (i = 0; i < MOTOR_NUMS; i++) {
+  for (let i = 0; i < MOTOR_NUMS; i++) {
     pwmDriver.setPWM(i, 0, START_VALUES[i]);
   }
 }

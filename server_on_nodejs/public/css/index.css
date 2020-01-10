@@ -1,3 +1,7 @@
+body {
+  align-items: center;
+}
+
 .motorSlider {
   -webkit-appearance: none;
   width: 100%;
@@ -66,4 +70,14 @@
 }
 #m6Slider::-moz-range-thumb {
   background: rgb(0, 225, 255);
+}
+
+.motorNumber {
+  all: unset;
+}
+
+.container {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }

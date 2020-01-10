@@ -7,10 +7,24 @@ const START_VALUES = [370, 375, 440, 280, 190, 175];
 
 function motorSliderInputHandle(event) {
   const inputTag = event.target;
-  const fontTag = inputTag.parentNode.querySelector("font");
-  fontTag.innerHTML = inputTag.value;
+  const numberInputTag = inputTag.parentNode.querySelector(
+    "input[type=number]"
+  );
 
-  // const inputTag = event.target;
+  numberInputTag.value = inputTag.value;
+  motorValueObj = {
+    id: inputTag.id,
+    value: inputTag.value
+  };
+  console.log(motorValueObj);
+  socket.emit("motor", motorValueObj);
+}
+
+function motorNumberInputHandle(event) {
+  const inputTag = event.target;
+  const sliderTag = inputTag.parentNode.querySelector("input[type=range]");
+
+  sliderTag.value = inputTag.value;
   motorValueObj = {
     id: inputTag.id,
     value: inputTag.value
@@ -31,23 +45,26 @@ function motorSliderChangeHandle(event) {
 
 function getController(id) {
   const pTag = document.createElement("p");
-  const fontTag = document.createElement("font");
-  const inputTag = document.createElement("input");
+  const sliderTag = document.createElement("input");
+  const numberInputTag = document.createElement("input");
 
-  pTag.appendChild(fontTag);
-  pTag.appendChild(inputTag);
+  pTag.appendChild(numberInputTag);
+  pTag.appendChild(sliderTag);
 
-  fontTag.innerText = START_VALUES[id];
-  inputTag.min = MIN_VALUES[id];
-  inputTag.max = MAX_VALUES[id];
-  inputTag.value = START_VALUES[id];
-  inputTag.step = 1;
-  inputTag.id = id;
-  inputTag.type = "range";
-  inputTag.classList.add("motorSlider");
-  inputTag.classList.add("blue");
-  inputTag.addEventListener("input", motorSliderInputHandle);
-  // inputTag.addEventListener("change", motorSliderChangeHandle);
+  numberInputTag.value = START_VALUES[id];
+  numberInputTag.type = "number";
+  numberInputTag.classList.add("motorNumber");
+  numberInputTag.id = id;
+  numberInputTag.addEventListener("change", motorNumberInputHandle);
+  sliderTag.min = MIN_VALUES[id];
+  sliderTag.max = MAX_VALUES[id];
+  sliderTag.value = START_VALUES[id];
+  sliderTag.step = 1;
+  sliderTag.id = id;
+  sliderTag.type = "range";
+  sliderTag.classList.add("motorSlider");
+  sliderTag.classList.add("blue");
+  sliderTag.addEventListener("input", motorSliderInputHandle);
 
   return pTag;
 }
