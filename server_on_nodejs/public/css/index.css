@@ -100,8 +100,9 @@ body {
 }
 
 .robotArmTable {
-  display: block;
+  display: flex;
   width: 700px;
+  flex-direction: column;
 }
 
 .motorNumber {
