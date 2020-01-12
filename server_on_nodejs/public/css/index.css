@@ -1,5 +1,6 @@
 body {
   align-items: center;
+  background-color: #c2e9fb;
 }
 
 .motorSlider {
@@ -80,4 +81,29 @@ body {
   width: 800px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.robotArmDiv {
+  display: flex;
+  background: linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 3px 3px;
+  align-items: center;
+  flex-direction: column;
+}
+
+.robotArmTitle {
+  display: flex;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.robotArmTable {
+  display: block;
+  width: 700px;
+}
+
+.motorNumber {
+  font-weight: bold;
 }
