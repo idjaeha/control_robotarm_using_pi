@@ -40,6 +40,12 @@ function httpHandler(req, res) {
       res.write(data);
       return res.end();
     });
+  } else if (pathName == "/public/image/refresh.png") {
+    fs.readFile(__dirname + "/public/image/refresh.png", function(err, data) {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.write(data);
+      return res.end();
+    });
   } else if (pathName == "/public/css/index.css") {
     fs.readFile(__dirname + "/public/css/index.css", function(err, data) {
       res.writeHead(200, { "Content-Type": "text/css" });
