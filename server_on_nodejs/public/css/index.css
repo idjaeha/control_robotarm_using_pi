@@ -112,4 +112,17 @@ body {
 
 .motorNumber {
   font-weight: bold;
+  width: 55px;
+}
+
+.twinkle {
+  animation-name: twinkle;
+  animation-duration: 1s;
+}
+
+@keyframes twinkle {
+  50% {
+    color: red;
+    transform: scale(1.2);
+  }
 }

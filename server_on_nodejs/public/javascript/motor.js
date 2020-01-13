@@ -7,6 +7,7 @@ const START_VALUES = [370, 375, 440, 280, 190, 175];
 const motorControllers = [];
 
 function handleChangeMotorValue(event) {
+  event.preventDefault();
   const inputTag = event.target;
   const id = parseInt(inputTag.id);
   const value = parseInt(inputTag.value);
@@ -67,6 +68,13 @@ function setMotorValue(id, value) {
   motorController.motorValueObj.value = value;
   motorController.sliderTag.value = value;
   motorController.numberInputTag.value = value;
+
+  motorController.numberInputTag.classList.add("twinkle");
+  setTimeout(twinkleText, 1000, motorController.numberInputTag, "twinkle");
+}
+
+function twinkleText(tag, animation) {
+  tag.classList.remove(animation);
 }
 
 function init() {
