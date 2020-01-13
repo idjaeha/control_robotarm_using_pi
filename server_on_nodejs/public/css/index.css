@@ -1,6 +1,7 @@
 body {
   align-items: center;
-  background-color: #c2e9fb;
+  /* background-color: #c2e9fb; */
+  background: linear-gradient(90deg, #feac5e 0%, #c779d0 50%, #4bc0c8 100%);
 }
 
 .motorSlider {
@@ -86,9 +87,13 @@ body {
 .robotArmDiv {
   display: flex;
   background: linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%);
-  border-radius: 10px;
+
+  border-radius: 20px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: white;
   padding: 10px;
-  box-shadow: 0px 3px 3px;
+  box-shadow: 0px 2px 2px;
   align-items: center;
   flex-direction: column;
 }
