@@ -13,8 +13,12 @@ function handleChangeMotorValue(event) {
   const id = parseInt(inputTag.id);
   const value = parseInt(inputTag.value);
   const motorController = motorControllers[id];
-  setMotorValue(id, value);
 
+  setMotorValue(id, value);
+  sendMotorObj(motorController);
+}
+
+function sendMotorObj(motorController) {
   console.log(motorController.motorValueObj);
   socket.emit("motor", motorController.motorValueObj);
 }
@@ -84,6 +88,7 @@ function init() {
     event.preventDefault();
     for (let i = 0; i < MOTOR_NUMS; i++) {
       setMotorValue(i, START_VALUES[i]);
+      sendMotorObj(motorControllers[i]);
     }
   });
 }
