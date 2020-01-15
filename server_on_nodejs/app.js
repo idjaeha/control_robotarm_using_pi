@@ -16,15 +16,6 @@ function setMotors() {
   }
 }
 
-function writeData() {
-  const fileUrl = `${__dirname}\\public\\data\\motorData.json`;
-  console.log(JSON.stringify(motorObjs));
-  fs.writeFile(fileUrl, JSON.stringify(motorObjs), "utf8", err => {
-    if (err) throw err;
-    console.log("The file has been saved!");
-  });
-}
-
 function init() {
   setMotors();
   socketInit();
