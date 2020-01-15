@@ -4,14 +4,17 @@ const socket = io(); //load socket.io-client and connect to the host that serves
 const MIN_VALUES = [0, 105, 280, 120, 120, 90];
 const MAX_VALUES = [1000, 475, 460, 445, 280, 290];
 const START_VALUES = [370, 375, 440, 280, 190, 175];
+// const MIN_VALUES = [0, 0, 0, 0, 0, 0];
+// const MAX_VALUES = [2000, 2000, 2000, 2000, 2000, 2000];
+// const START_VALUES = [1350, 700, 1670, 1040, 820, 1100];
 const robotArmRefresh = document.querySelector("#jsRobotArmRefresh");
 const motorControllers = [];
 
 function handleChangeMotorValue(event) {
   event.preventDefault();
   const inputTag = event.target;
-  const id = parseInt(inputTag.id);
-  const value = parseInt(inputTag.value);
+  const id = inputTag.id;
+  const value = inputTag.value;
   const motorController = motorControllers[id];
 
   setMotorValue(id, value);

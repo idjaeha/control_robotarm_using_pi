@@ -3,14 +3,26 @@ const fs = require("fs"); //require filesystem module
 const io = require("socket.io")(http); //require socket.io module and pass the http object (server)
 const url = require("url");
 const MOTOR_NUMS = 6;
+// const START_VALUES = [1350, 700, 1670, 1040, 820, 1100];
 const START_VALUES = [370, 375, 440, 280, 190, 175];
 const makePwmDriver = require("adafruit-i2c-pwm-driver");
 const pwmDriver = makePwmDriver({ address: 0x40, device: "/dev/i2c-1" });
+const MOTOR_FREQUENCY = 50;
 
 function setMotors() {
+  pwmDriver.setPWMFreq(MOTOR_FREQUENCY);
   for (let i = 0; i < MOTOR_NUMS; i++) {
     pwmDriver.setPWM(i, 0, START_VALUES[i]);
   }
+}
+
+function writeData() {
+  const fileUrl = `${__dirname}\\public\\data\\motorData.json`;
+  console.log(JSON.stringify(motorObjs));
+  fs.writeFile(fileUrl, JSON.stringify(motorObjs), "utf8", err => {
+    if (err) throw err;
+    console.log("The file has been saved!");
+  });
 }
 
 function init() {
